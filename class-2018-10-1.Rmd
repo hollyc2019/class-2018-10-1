@@ -9,9 +9,8 @@ output: html_document
 library(tidyverse)
 library(dplyr)
 library(knitr)
-library(readr)
-italian_polls <- read_csv("polls_IT-parliament_2018-10-01.csv")
-View(italian_polls)
+italian_polls <- read_csv("polls_IT-parliament_2018-10-01.csv") %>% 
+  select(date, firm, FIPDLFI:NcI)
 ```
 
 ```{r}
@@ -23,5 +22,19 @@ italian_polls %>%
   ggplot(aes(x = date, y = LN)) +
   geom_point(color = "green") +
   geom_point(aes(x = date, y = M5S, color = "red"))
+```
+
+```{r}
+italian_polls %>% 
+  gather(key = "party", value = "poll", FIPDLFI, LN, M5S, PD) %>% 
+  filter(date >= "2017-09-26") %>% 
+  ggplot(aes(x = date, y = poll, color = party)) +
+  geom_point(alpha = 0.2) + geom_smooth()
+##value is new variable, key is whats at the top
+```
+
+```{r}
+italian_polls %>% 
+
 ```
 
