@@ -5,7 +5,7 @@ date: "October 1, 2018"
 output: html_document
 ---
 
-```{r, message = FALSE}
+```{r, message=FALSE}
 library(tidyverse)
 library(dplyr)
 library(knitr)
@@ -16,5 +16,12 @@ View(italian_polls)
 
 ```{r}
 glimpse(italian_polls)
+```
+
+```{r}
+italian_polls %>% 
+  ggplot(aes(x = date, y = LN)) +
+  geom_point(color = "green") +
+  geom_point(aes(x = date, y = M5S, color = "red"))
 ```
 
